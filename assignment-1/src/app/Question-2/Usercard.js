@@ -1,8 +1,5 @@
 // Used to display the user details such as name, email, avatarURL
 
-"use client"
-import { useState } from "react"
-
 export default function UserCard({name, email, avatarURL}){
     return(
         <>

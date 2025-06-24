@@ -1,7 +1,6 @@
 // Q4: Function that is used to increment or decrement a counter using 2 buttons
 
 'use client'
-import { setConfig } from "next/config";
 import { useState } from "react";
 export default function Counter(){
     
