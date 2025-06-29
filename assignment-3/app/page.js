@@ -10,11 +10,11 @@ export default function Home() {
     <br/>
     <Link href="./Question-3">Question-3</Link>
     <br/>
-    <Link href="./Question-4">Question-4</Link>
-    <br/>
-    <Link href="./Question-5">Question-5</Link>
-    <br/>
-    <Link href="./Question-6">Question-6</Link>
+    {/* <Link href="./Question-4">Question-4</Link> */}
+    {/* <br/> */}
+    {/* <Link href="./Question-5">Question-5</Link> */}
+    {/* <br/> */}
+    {/* <Link href="./Question-6">Question-6</Link> */}
     </>
   );
 }
