@@ -1,19 +1,11 @@
-// /components/Child.js
-"use client";
+// Child component
 
-import React from "react";
-
-const Child = ({ count, onIncrement, onReset }) => {
-  return (
-    <div style={{ border: "1px solid gray", padding: 20 }}>
-      <h3>Child Component</h3>
-      <p>Current Count: {count}</p>
-      <button onClick={onIncrement}>Increment Count</button>
-      <button onClick={onReset} style={{ marginLeft: 10 }}>
-        Reset Count
-      </button>
-    </div>
-  );
-};
-
-export default Child;
+export default function Child({count, buttonClicked, reset}){
+    return(
+        <>
+        <p>This is the child component. Count: {count}</p>
+        <button onClick={buttonClicked}>Increment</button>
+        <button onClick={reset}>Reset it</button>
+        </>
+    )
+}

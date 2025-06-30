@@ -1,26 +1,26 @@
 "use client"
-import { createContext, useContext, useState } from 'react';
+import { createContext, useState } from "react";
 
-const CartContext = createContext();
+// Created a new context
+export const CartContext = createContext();
 
-export const useCart = () => useContext(CartContext);
+export default function CartProvider({children}){
+    // Created an empty cart
+    const [cart, setCart] = useState([]);
 
-export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+    // Add to cart
+    const addToCart = (product) => {
+        setCart((prev) => [...prev, product]);
+    }
 
-  const addToCart = (product) => {
-    setCart((prev) => [...prev, product]);
-  };
+    // Remove to cart
+    const removeToCart = (productID) => {
+        setCart((prev) => prev.filter((item => (item.id) !== productID)))
+    }
 
-  const removeFromCart = (id) => {
-    setCart((prev) => prev.filter(item => item.id !== id));
-  };
-
-  const total = cart.reduce((acc, item) => acc + item.price, 0);
-
-  return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, total }}>
-      {children}
-    </CartContext.Provider>
-  );
-};
+    return(
+        <CartContext.Provider value={{cart, addToCart, removeToCart}}>
+            {children}
+        </CartContext.Provider>
+    )
+}

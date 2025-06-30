@@ -1,18 +1,22 @@
 "use client"
-
 import { createContext, useState } from "react";
 
+// Context created
 export const LanguageContext = createContext();
 
-export function LanguageProvider({children}){
-    const [language, setLanguage] = useState("en");
+export const LanguageProvider = ({children}) => {
+    // Created a state of language
+    const[language, setLanguage] = useState("This is english - English");
 
-    const switchLanguage = () => {
-        setLanguage(prev => (prev === "en" ? "es" : "en"));
-    };
+    // Change the language from english to spanish
+    const LanguageToggler = () => {
+        setLanguage((prev) => (prev === "This is english - English" ? "esto es español - Spanish" : 
+        "This is english - English"))
+    }
 
+    // Returned the provider
     return(
-        <LanguageContext.Provider value={{language, switchLanguage}}>
+        <LanguageContext.Provider value={{language, LanguageToggler}}>
             {children}
         </LanguageContext.Provider>
     )
