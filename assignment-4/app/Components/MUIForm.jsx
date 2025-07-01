@@ -3,17 +3,23 @@ import { useState } from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
 
 export default function MUIForm() {
-  const [formData, setFormData] = useState({ name: "", email: "" });
+  // State for form
+  const [form, setForm] = useState({ name: "", email: "" });
+
+  // State for error
   const [errors, setErrors] = useState({ name: "", email: "" });
 
+  // Function to handle change
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setFormData((prev) => ({
+    // Add values into form
+    setForm((prev) => ({
       ...prev,
       [name]: value,
     }));
 
+    // Make the errors values corresponding to form empty
     setErrors((prev) => ({
       ...prev,
       [name]: "",
@@ -21,28 +27,32 @@ export default function MUIForm() {
   };
 
   const validate = () => {
+    // Created new object for errors
     const newErrors = {};
 
-    if (formData.name.trim() === "") {
-      newErrors.name = "Name is required";
+    if (form.name.trim() === "") {
+      newErrors.name = "Enter a valid name";
     }
 
-    if (!formData.email.includes("@")) {
+    if (!form.email.includes("@")) {
       newErrors.email = "Enter a valid email";
     }
 
     setErrors(newErrors);
+    // Check if there is any error
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
+    // Prevent re-rendering
     e.preventDefault();
     if (validate()) {
-      console.log("Form submitted ✅", formData);
+      console.log("Form submitted!", form);
     }
   };
 
   return (
+    // Components of MUI are used
     <Box
       component="form"
       onSubmit={handleSubmit}
@@ -55,7 +65,7 @@ export default function MUIForm() {
       <TextField
         label="Name"
         name="name"
-        value={formData.name}
+        value={form.name}
         onChange={handleChange}
         error={!!errors.name}
         helperText={errors.name}
@@ -66,7 +76,7 @@ export default function MUIForm() {
       <TextField
         label="Email"
         name="email"
-        value={formData.email}
+        value={form.email}
         onChange={handleChange}
         error={!!errors.email}
         helperText={errors.email}

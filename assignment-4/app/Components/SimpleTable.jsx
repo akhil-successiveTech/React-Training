@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
+// Sample data
 const sampleData = [
   { id: 1, name: "Alice", age: 25 },
   { id: 2, name: "Bob", age: 21 },
@@ -23,28 +24,36 @@ const sampleData = [
 ];
 
 export default function SimpleTable() {
-  const [orderBy, setOrderBy] = useState("name");
+  // UseState which column to sort
+  const [column, setColumn] = useState("name");
+  // UseState to define order of sorting
   const [order, setOrder] = useState("asc");
+  // UseState of Current page number
   const [page, setPage] = useState(0);
+  // Fixed rows
   const rowsPerPage = 4;
 
+  // Change the order of a column(toggle order)
   const handleSort = (property) => {
-    const isAsc = orderBy === property && order === "asc";
+    const isAsc = column === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(property);
+    setColumn(property);
   };
 
+  // Creates a new copy of sorted data
   const sortedData = [...sampleData].sort((a, b) => {
-    if (order === "asc") return a[orderBy] > b[orderBy] ? 1 : -1;
-    else return a[orderBy] < b[orderBy] ? 1 : -1;
+    if (order === "asc") return a[column] > b[column] ? 1 : -1;
+    else return a[column] < b[column] ? 1 : -1;
   });
 
+  // Paginate the data
   const paginatedData = sortedData.slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
 
   return (
+    // MUI Components
     <Paper sx={{ width: "100%", overflow: "hidden", mt: 4 }}>
       <TableContainer>
         <Table>
@@ -52,8 +61,8 @@ export default function SimpleTable() {
             <TableRow>
               <TableCell>
                 <TableSortLabel
-                  active={orderBy === "name"}
-                  direction={orderBy === "name" ? order : "asc"}
+                  active={column === "name"}
+                  direction={column === "name" ? order : "asc"}
                   onClick={() => handleSort("name")}
                 >
                   Name
@@ -61,8 +70,8 @@ export default function SimpleTable() {
               </TableCell>
               <TableCell align="right">
                 <TableSortLabel
-                  active={orderBy === "age"}
-                  direction={orderBy === "age" ? order : "asc"}
+                  active={column === "age"}
+                  direction={column === "age" ? order : "asc"}
                   onClick={() => handleSort("age")}
                 >
                   Age

@@ -1,29 +1,31 @@
 "use client"
 import { useState } from "react";
 
-const DropdownExample = () => {
-  const [selectedOption, setSelectedOption] = useState("");
+const Dropdown = () => {
+  // State to handle the options
+  const [option, setOption] = useState("");
 
+  // Function to set option
   const handleChange = (e) => {
-    setSelectedOption(e.target.value);
+    setOption(e.target.value);
   };
 
   return (
     <div>
       <h2>Select a Fruit</h2>
-      
-      <select value={selectedOption} onChange={handleChange}>
+      <select style={{border: "2px solid black"}} value={option} onChange={handleChange}>
         <option value="">-- Choose one --</option>
-        <option value="apple">Apple</option>
-        <option value="banana">Banana</option>
-        <option value="orange">Orange</option>
+        <option value="Apple">Apple</option>
+        <option value="Banana">Banana</option>
+        <option value="Orange">Orange</option>
       </select>
 
-      {selectedOption && (
-        <p>You selected: <strong>{selectedOption}</strong></p>
+      {option && (
+        <p>You selected: <strong>{option}</strong></p>
       )}
+      {/* This is conditional rendering */}
     </div>
   );
 }
 
-export default DropdownExample;
+export default Dropdown;

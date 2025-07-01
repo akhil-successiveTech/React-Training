@@ -1,29 +1,32 @@
 "use client"
 import { useState } from "react";
 
-function Message() {
-  return <p>You typed "show"!</p>;
-}
-
 const ConditionalComponent = () => {
+  // Created useState to take input
   const [text, setText] = useState("");
-  const [showMessage, setShowMessage] = useState(false);
+  // Created to display message 
+  const [message, setMessage] = useState("");
 
+  // Function to check the text
   const handleClick = () => {
-    setShowMessage(text.toLowerCase() === "show");
+    const value = text.toLowerCase()
+    if(value.trim() === "show"){
+      setMessage("You typed show!");
+    } 
   };
 
   return (
     <div>
+      {/* Taking input */}
       <input
         type="text"
         value={text}
+        style={{border: "2px solid black"}}
         onChange={(e) => setText(e.target.value)}
         placeholder="Type something..."
       />
-      <button onClick={handleClick}>Submit</button>
-
-      {showMessage && <Message />}
+      <button style={{border: "2px solid black"}} onClick={handleClick}>Submit</button>
+      <p>{message}</p>
     </div>
   );
 }

@@ -8,8 +8,8 @@ import {
   Typography,
 } from "@mui/material";
 
-// ✅ Yup validation schema
-const validationSchema = Yup.object({
+// Created validation Schema using Yup library
+const validation = Yup.object({
   email: Yup.string()
     .email("Invalid email format")
     .required("Email is required"),
@@ -23,20 +23,23 @@ const validationSchema = Yup.object({
     .required("Phone number is required"),
 });
 
-export default function FormikYupForm() {
+export default function YupForm() {
+  // Creating the form values using Formik library
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
       phone: "",
     },
-    validationSchema,
+    // Passed Yup schema for validation 
+    validation,
     onSubmit: (values) => {
-      console.log("Form submitted ✅", values);
+      console.log("Form submitted!", values);
     },
   });
 
   return (
+    // MUI Components
     <Box
       component="form"
       onSubmit={formik.handleSubmit}
@@ -82,7 +85,7 @@ export default function FormikYupForm() {
         error={formik.touched.phone && Boolean(formik.errors.phone)}
         helperText={formik.touched.phone && formik.errors.phone}
       />
-
+      
       <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }}>
         Submit
       </Button>

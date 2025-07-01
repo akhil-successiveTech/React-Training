@@ -11,17 +11,22 @@ import {
   ListItem,
 } from "@mui/material";
 
-// ✅ Yup schema
+// Created validation using yup
 const validationSchema = Yup.object({
-  name: Yup.string().required("Name is required"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
+  name: Yup.string()
+  .required("Name is required"),
+  email: Yup.string()
+  .email("Invalid email")
+  .required("Email is required"),
   age: Yup.number()
     .typeError("Age must be a number")
     .min(1, "Must be at least 1")
     .required("Age is required"),
 });
 
-export default function ErrorSummaryForm() {
+
+export default function ErrorForm() {
+  // Creating the form values using Formik library
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -35,6 +40,7 @@ export default function ErrorSummaryForm() {
     },
   });
 
+  // Checks if there is some error and user tried to submit the form
   const hasErrors = Object.keys(formik.errors).length > 0 && formik.submitCount > 0;
 
   return (
@@ -47,7 +53,7 @@ export default function ErrorSummaryForm() {
         User Form
       </Typography>
 
-      {/* ❗ Error summary shown only if form is invalid and submitted */}
+      
       {hasErrors && (
         <Alert severity="error" sx={{ mb: 2 }}>
           Please fix the following errors:

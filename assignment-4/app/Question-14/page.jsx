@@ -1,8 +1,8 @@
-import ErrorSummaryForm from "../Components/ErrorSummaryForm";
+import ErrorForm from "../Components/ErrorForm";
 
 const Home = () => {
     return(
-        <ErrorSummaryForm/>
+        <ErrorForm/>
     )
 }
 

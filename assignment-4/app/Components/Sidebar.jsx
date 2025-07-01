@@ -4,15 +4,19 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
 import { useState } from "react";
 
+// Width of the side bar in pixels
 const drawerWidth = 240;
 
 export default function Sidebar() {
+  // State to check sidebar is open or closed
   const [open, setOpen] = useState(false);
 
+  // Function to make it opposite
   const toggleDrawer = () => {
     setOpen((prev) => !prev);
   };
 
+  // Links of all the pages in the form of array
   const links = [
     { text: "Home", href: "/" },
     { text: "About", href: "/about" },

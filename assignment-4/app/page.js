@@ -11,7 +11,7 @@ export default function QuestionLinks() {
       <ul>
         {questions.map((q) => (
           <li key={q}>
-            <Link href={`./Question-${q}`}>Question-{q}</Link>
+            <Link style={{border: "2px solid black"}} href={`./Question-${q}`}>Question-{q}</Link>
           </li>
         ))}
       </ul>

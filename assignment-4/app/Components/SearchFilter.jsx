@@ -1,12 +1,15 @@
 "use client"
 import { useState } from "react";
 
-export default function SearchFilter() {
+const SearchFilter = () => {
+  // Input useState
   const [query, setQuery] = useState("");
 
+  // List of item in which we are searching
   const items = ["Apple", "Banana", "Orange", "Mango", "Grapes", "Pineapple"];
 
-  const filteredItems = items.filter((item) =>
+  // Function to filter the input
+  const filterItems = items.filter((item) =>
     item.toLowerCase().includes(query.toLowerCase())
   );
 
@@ -14,19 +17,27 @@ export default function SearchFilter() {
     <div>
       <h2>Search Fruits</h2>
 
+      {/* Input from user */}
       <input
         type="text"
         value={query}
+        style={{border: "2px solid black"}}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Type to search..."
       />
 
       <ul>
-        {filteredItems.map((item, index) => (
+
+        {/* Displaying the values  */}
+        {filterItems.map((item, index) => (
           <li key={index}>{item}</li>
         ))}
-        {filteredItems.length === 0 && <li>No items found.</li>}
+
+        {/* This is conditional rendering */}
+        {filterItems.length === 0 && <li>No items found.</li>}
       </ul>
     </div>
   );
 }
+
+export default SearchFilter;

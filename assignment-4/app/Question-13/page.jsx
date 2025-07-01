@@ -1,8 +1,8 @@
-import FormikYupForm from "../Components/FormikYupForm";
+import YupForm from "../Components/YupForm";
 
 const Home = () => {
     return(
-        <FormikYupForm/>
+        <YupForm/>
     )
 }
 
