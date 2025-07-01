@@ -1,7 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import TestContext from "@/context/TestContext";
-import { useState } from "react";
+import { AuthProvider } from "./Question-1/AuthContext";
+import { ThemeProvider } from "./Question-1/ThemeContext";
+import Link from "next/link";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,7 +26,16 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <nav style={{ marginBottom: "20px" }}>
+          <Link href="/" style={{ marginRight: "10px" }}>Home</Link>
+          <Link href="./About/about">About</Link>
+        </nav>
+        <hr />
+        <AuthProvider>
+          <ThemeProvider>
+            {children}
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );

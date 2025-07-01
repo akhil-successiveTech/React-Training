@@ -1,10 +1,12 @@
-// /pages/index.js
-import AuthParent from "./AuthParent";
+import {AuthProvider} from "./AuthContext";
+import Authentication from "./AuthComponent";
+import { ThemeProvider } from "./ThemeContext";
+import { Children } from "react";
 
-export default function Home() {
+const Page = () => {
   return (
-    <div>
-      <AuthParent />
-    </div>
+    <Authentication />
   );
-}
+};
+
+export default Page;
