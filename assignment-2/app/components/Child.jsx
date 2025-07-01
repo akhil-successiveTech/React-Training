@@ -1,6 +1,6 @@
 // Child component
 
-export default function Child({count, buttonClicked, reset}){
+const Child = ({count, buttonClicked, reset}) => {
     return(
         <>
         <p>This is the child component. Count: {count}</p>
@@ -9,3 +9,5 @@ export default function Child({count, buttonClicked, reset}){
         </>
     )
 }
+
+export default Child;

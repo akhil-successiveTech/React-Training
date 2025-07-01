@@ -2,11 +2,14 @@
 // named count initialized to 0. Render the current value of count in a <p> element. Add two buttons, 
 // one for incrementing the count and another for decrementing it.
 
-import CounterWithStep from "./CounterWithStep";
+import CounterWithStep from "../components/CounterWithStep";
 
-export default function Home(){
-    let value = 2;
+const Home = () => {
     return (
-        <CounterWithStep value = {value}/>
+        <>
+            <CounterWithStep/>
+        </>
     )
 }
+
+export default Home;

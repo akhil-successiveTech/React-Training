@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-export default function personForm() {
+const personForm = () => {
   const [firstName, setFirst] = useState("");
   const [lastName, setLast] = useState("");
   const [age, setAge] = useState("");
@@ -32,6 +32,7 @@ export default function personForm() {
           Enter your age:
           <input
             type="number"
+            min = "1"
             value={age}
             onChange={(e) => setAge(e.target.value)}
           />
@@ -45,3 +46,5 @@ export default function personForm() {
     </>
   );
 }
+
+export default personForm;

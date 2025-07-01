@@ -17,7 +17,7 @@ const EmployeeSalary = () => {
     return (total / employees.length).toFixed(2);
   }, [employees]);
 
-  const updateSalaries = () => {
+  const updateSalaries = () => { 
     const updated = employees.map((emp) => ({
       ...emp,
       salary: emp.salary + Math.floor(Math.random() * 5000 + 1000),

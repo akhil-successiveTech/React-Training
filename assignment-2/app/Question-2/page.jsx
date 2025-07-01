@@ -1,11 +1,12 @@
 // Create a function named PersonForm. Use the useState hook to manage 3 variable: firstName, lastName, age,
 // all initialized to empty strings.
 
-import PersonForm from "./PersonForm";
+import PersonForm from "../components/PersonForm";
 
-export default function Home(){
+const Home = () => {
     return(
         <PersonForm />
     )
 }
 
+export default Home;

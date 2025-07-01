@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 
-export default function Clock(){
+const Clock = () => {
 
     let [current, setCurrent] = useState(new Date().toLocaleTimeString());
     useEffect(() => {
@@ -19,3 +19,5 @@ export default function Clock(){
         </>
     )
 }
+
+export default Clock;

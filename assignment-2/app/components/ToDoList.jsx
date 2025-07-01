@@ -1,13 +1,13 @@
 "use client"
 import { use, useState } from "react"
 
-export default function ToDoList(){
+const ToDoList = () => {
     let [string, setString] = useState("")
     let [ToDos, setToDos] = useState([])
 
     function add () {
+        if (string.trim() === "") return;
         setToDos([...ToDos, string]);
-        console.log(string)
         setString("");
     }
 
@@ -26,6 +26,7 @@ export default function ToDoList(){
                 <input
                 style={{border: "2px solid black", padding: "5px 5px"}}
                 type="text"
+                value={string}
                 onChange={(e) => setString(e.target.value)}
                 >
                 </input>
@@ -39,11 +40,13 @@ export default function ToDoList(){
                 {ToDos.map((value, index) => (
                     <li key={index}>
                         {/* {value} */}
-                        <button style={{border: "5px 5px"}} onClick={deleteArr(index)}>Delete</button>
-                        <div key={index}>{value}</div>
+                        <span>{value}</span>
+                        <button style={{border: "5px 5px"}} onClick={() => deleteArr(index)}>Delete</button>
                     </li>
                 ))}
             </ul>
         </>
     )
 }
+
+export default ToDoList;

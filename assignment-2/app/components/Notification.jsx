@@ -1,14 +1,15 @@
 "use client"
 import { useEffect, useState } from "react"
 
-export default function Notification(){
+const Notification = () => {
     let[message, setMessage] = useState("Message Received!")
-
     return(
         useEffect(() => {
             setInterval(() => {
-                alter(message)
+                alert(message)
             }, 5000)
         })
     )
 }
+
+export default Notification;

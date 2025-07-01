@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-export default function Random(){
+const Random = () => {
     let [num, setNum] = useState(0);
 
     function newNum() {
@@ -16,3 +16,5 @@ export default function Random(){
         </>
     )
 }
+
+export default Random;
