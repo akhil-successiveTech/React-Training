@@ -1,47 +1,41 @@
 "use client";
+import { useState, useEffect, useRef } from "react";
 
-import { useState, useRef, useCallback, useEffect } from "react";
-
-const useTimer = (initialDuration = 60) => {
-  const [timeLeft, setTimeLeft] = useState(initialDuration);
-  const [isRunning, setIsRunning] = useState(false);
+export default function useTimer(initialSeconds = 10) {
+  const [time, setTime] = useState(initialSeconds);
+  const [running, setRunning] = useState(false);
   const intervalRef = useRef(null);
 
-  const start = useCallback(() => {
-    if (intervalRef.current !== null) return;
-
-    setIsRunning(true);
-    intervalRef.current = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(intervalRef.current);
-          intervalRef.current = null;
-          setIsRunning(false);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-  }, []);
-
-  const pause = useCallback(() => {
-    if (intervalRef.current !== null) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-      setIsRunning(false);
+  const start = () => {
+    if (!running && time > 0) {
+      setRunning(true);
+      intervalRef.current = setInterval(() => {
+        setTime((prev) => {
+          if (prev <= 1) {
+            clearInterval(intervalRef.current);
+            setRunning(false);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
     }
-  }, []);
+  };
 
-  const reset = useCallback(() => {
-    pause();
-    setTimeLeft(initialDuration);
-  }, [pause, initialDuration]);
+  const pause = () => {
+    clearInterval(intervalRef.current);
+    setRunning(false);
+  };
+
+  const reset = () => {
+    clearInterval(intervalRef.current);
+    setTime(initialSeconds);
+    setRunning(false);
+  };
 
   useEffect(() => {
     return () => clearInterval(intervalRef.current);
   }, []);
 
-  return { timeLeft, isRunning, start, pause, reset };
-};
-
-export default useTimer;
+  return { time, running, start, pause, reset };
+}

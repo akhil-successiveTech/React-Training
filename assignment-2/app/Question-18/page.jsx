@@ -2,12 +2,12 @@
 // hook that allows storing and retrieving data from local storage. Implement methods for setting, getting, and 
 // removing data using the hook.
 
-import UserPreferences from "@/app/components/UserPreferences";
+import ManageLocalStorage from "../components/LocalStorage";
 
 export default function Home() {
   return (
     <div>
-      <UserPreferences />
+      <ManageLocalStorage/>
     </div>
   );
 }
