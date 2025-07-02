@@ -2,7 +2,7 @@
 // hook that allows storing and retrieving data from local storage. Implement methods for setting, getting, and 
 // removing data using the hook.
 
-import UserPreferences from "@/app/components/Cart";
+import UserPreferences from "@/app/components/UserPreferences";
 
 export default function Home() {
   return (

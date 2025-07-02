@@ -8,21 +8,21 @@ import Child from "./Child";
 // Parent component
 const Parent = () => {
     // Count state
-    const[value, setValue] = useState(0);
+    const[count, setCount] = useState(0);
 
     // Function to increment the value
     const buttonClicked = useCallback(() => {
-        setValue(value+1);
-    }, [value])
+        setCount(count+1);
+    }, [count])
 
     // Resets the value to 0
-    const reset = () => {setValue(0)};
+    const reset = () => (setCount(0));
 
     return(
         <>
-            <p>Count is: {value}</p>
-            <button onClick={buttonClicked}>Increment</button>
-            <Child buttonClicked={buttonClicked} count={value} reset={reset}/>
+            {/* <p>Count is: {value}</p> */}
+            {/* <button onClick={buttonClicked}>Increment</button> */}
+            <Child buttonClicked={buttonClicked} count={count} reset={reset}/>
         </>
     )
 

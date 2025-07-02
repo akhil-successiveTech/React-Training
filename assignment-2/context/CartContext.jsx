@@ -4,6 +4,13 @@ import { createContext, useState } from "react";
 // Created a new context
 export const CartContext = createContext();
 
+// Created products
+const products = [
+  {id: 1, name: "Shoes", price: 1000},
+  {id: 2, name: "Shirt", price: 500},
+  {id: 3, name: "Cap", price: 200}
+];
+
 const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
@@ -18,7 +25,7 @@ const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeToCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeToCart, products }}>
       {children}
     </CartContext.Provider>
   );

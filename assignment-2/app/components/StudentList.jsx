@@ -3,25 +3,21 @@
 import React, { useState, useMemo } from "react";
 
 const StudentList = () => {
-  const [students, setStudents] = useState(["Alice", "Bob", "Charlie"]);
+  const SAMPLE_LIST = useMemo(() => ["Alice", "Bob", "Charlie"]);
+  const [students, setStudents] = useState(SAMPLE_LIST);
 
   const addStudent = () => {
     const newName = `Student ${students.length + 1}`;
     setStudents((prev) => [...prev, newName]);
   };
 
-  const memoizedStudentList = useMemo(() => {
-    console.log("Generating student list...");
-    return students.map((name, index) => (
-      <li key={index}>{name}</li>
-    ));
-  }, [students]);
-
   return (
     <div style={{ padding: 20 }}>
       <h2>Student List</h2>
-      <ul>{memoizedStudentList}</ul>
-      <button onClick={addStudent}>Add Student</button>
+      <ul>{students.map((name, index) => (
+        <li key={index}>{name}</li>
+      ))}</ul>
+      <button style={{border: "2px solid black"}} onClick={addStudent}>Add Student</button>
     </div>
   );
 };

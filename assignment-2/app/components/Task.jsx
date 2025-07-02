@@ -12,27 +12,27 @@ const Home = () => {
     { id: 3, task: "Sleeping", status: "Complete" },
   ]);
 
-  // Toggle the tasks complete and incomplete
-  const ToggleTasks = (id) => {
+  // Toggle the tasks complete and incomplete using useCallback
+  const ToggleTasks = useCallback((id) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
         task.id === id ? { ...task, status: task.status === "Complete" ? "Incomplete" : "Complete" }: task
       )
     );
-  };
+  });
 
   return (
     // Iterates from each element
     <>
       {Tasks.map((tasks) => (
-        <div key={tasks.id}>
+        <div key={tasks.id} style={{display: "flex", width: "300px", justifyContent: "space-evenly"}}>
           <p
             style={{
               textDecoration: tasks.status === "Incomplete" ? "line-through" : "none",
             }}>
             {tasks.task}
           </p>
-          <button onClick={() => ToggleTasks(tasks.id)}>
+          <button style = {{border: "2px solid black"}} onClick={() => ToggleTasks(tasks.id)}>
           <p>Press here to {tasks.status}</p>
           </button>
           <div>

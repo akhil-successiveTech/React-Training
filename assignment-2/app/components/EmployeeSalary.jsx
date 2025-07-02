@@ -2,21 +2,24 @@
 
 import React, { useState, useMemo } from "react";
 
-const initialEmployees = [
+const data = [
   { name: "Alice", salary: 50000 },
   { name: "Bob", salary: 60000 },
   { name: "Charlie", salary: 55000 },
 ];
 
 const EmployeeSalary = () => {
-  const [employees, setEmployees] = useState(initialEmployees);
+  // State to manage employees data
+  const [employees, setEmployees] = useState(data);
 
+  // Used useMemo for average salary calculation
   const averageSalary = useMemo(() => {
-    console.log("Calculating average salary...");
     const total = employees.reduce((sum, emp) => sum + emp.salary, 0);
     return (total / employees.length).toFixed(2);
+    // Re-render only when employees change
   }, [employees]);
 
+  // Function to update the salaries using Math.random 
   const updateSalaries = () => { 
     const updated = employees.map((emp) => ({
       ...emp,
@@ -29,6 +32,7 @@ const EmployeeSalary = () => {
     <div style={{ padding: 20 }}>
       <h2>Employee Salary Information</h2>
       <ul>
+        {/* Displaying employees salary */}
         {employees.map((emp, index) => (
           <li key={index}>
             {emp.name} - ₹{emp.salary}
@@ -36,7 +40,8 @@ const EmployeeSalary = () => {
         ))}
       </ul>
       <h3>Average Salary: ₹{averageSalary}</h3>
-      <button onClick={updateSalaries}>Update Salaries</button>
+      {/* Button to update the salary */}
+      <button style={{border: "2px solid black"}} onClick={updateSalaries}>Update Salaries</button>
     </div>
   );
 };

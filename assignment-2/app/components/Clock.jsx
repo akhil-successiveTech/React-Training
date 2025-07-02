@@ -3,10 +3,13 @@ import { useEffect, useState } from "react"
 
 const Clock = () => {
 
-    let [current, setCurrent] = useState(new Date().toLocaleTimeString());
+    // Created to store current time
+    let [time, setTime] = useState(new Date().toLocaleTimeString());
+    
+    // useEffect hook to update time every second
     useEffect(() => {
         const intervalID = setInterval(() => {
-            setCurrent(new Date().toLocaleTimeString())
+            setTime(new Date().toLocaleTimeString())
         }, 1000)
         return() => {
             clearInterval(intervalID);
@@ -15,7 +18,7 @@ const Clock = () => {
 
     return(
         <>
-            <p>Current time: {current}</p>
+            <p>Current time: {time}</p>
         </>
     )
 }

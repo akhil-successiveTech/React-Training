@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { LanguageContext } from "@/context/LanguageContext";
 
 const Home = () => {
+    // Using states and functions from Language Context
     const {language, LanguageToggler} = useContext(LanguageContext)
 
     return(

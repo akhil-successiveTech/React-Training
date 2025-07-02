@@ -6,24 +6,30 @@ import { useReducer } from "react";
 
 const Home = () => {
 
-    //Reducer functions
-    const reducer1 = (state, action) => {
-        return state+1;
-    };
-    const reducer2 = (state, action) => {
-        return state+1;
+    // Reducer function
+    const reducer = (state, action) => {
+        switch (action.type) {
+            case "INC":
+                return ({ ...state, congress: state.congress + 1 })
+                break;
+            case "BJP":
+                return ({ ...state, bjp: state.bjp + 1 })
+                break;
+            default:
+                break;
+        }
     };
 
-    // Used useReducer hook
-    const[BJP, dispatchBJP] = useReducer(reducer1, 0);
-    const[congress, dispatchCon] = useReducer(reducer2, 0);
+    // Count the votes
+    const counting = { bjp : 0, congress: 0 };
+    const[state, dispatch] = useReducer(reducer, counting);
 
     return(
         <>
-            <p>BJP: {BJP}</p>
-            <button onClick={() => {dispatchBJP({name: "BJP"})}}>Vote for BJP</button>
-            <p>Congress: {congress}</p>
-            <button onClick={() => {dispatchCon({type: "Increment"})}}>Vote for Congress</button>
+            <p>BJP: {state.bjp}</p>
+            <button style={{border: "2px solid black"}} onClick={() => dispatch({type: "BJP"})}>Vote for BJP</button>
+            <p>Congress: {state.congress}</p>
+            <button style={{border: "2px solid black"}} onClick={() => dispatch({type: "INC"})}>Vote for Congress</button>
         </>
     )
 }

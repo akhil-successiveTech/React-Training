@@ -5,16 +5,9 @@
 import { CartContext } from "@/context";
 import { useContext } from "react";
 
-// Array of products
-const products = [
-    {id: 1, name: "Shoes", price: 1000},
-    {id: 2, name: "Shirt", price: 500},
-    {id: 3, name: "Cap", price: 200}
-];
-
 const Home = () => {
     // Importing the functionalities from cart context
-    const {cart, addToCart, removeToCart} = useContext(CartContext);
+    const {cart, addToCart, removeToCart, products} = useContext(CartContext);
     const total = cart.reduce((sum, item) => sum + item.price, 0);
 
     return(
@@ -26,8 +19,8 @@ const Home = () => {
                     <button onClick={() => addToCart(data)}>Add to cart</button>
                 </div>
             ))}
+            {/* Displays the total item in the cart */}
             <p style={{padding: "3px 3px"}}>No. of products available: {cart.length}</p>
-
             
             {cart.map((data) => (
                 <div key={data.id} style={{padding: "3px 3px"}}>
