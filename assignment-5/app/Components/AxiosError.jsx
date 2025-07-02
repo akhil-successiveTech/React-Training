@@ -1,5 +1,4 @@
 import axios from "axios";
-// Not used "use client" so it is a server side component
 
 export default async function PostsPage() {
   // To store the fetched data
@@ -19,6 +18,8 @@ export default async function PostsPage() {
     return (
       <div style={{ color: "red", textAlign: "center", marginTop: 50 }}>
         Error: {error}
+        {/* Retry button that runs this function again */}
+        <button onClick={() => (PostsPage)}>Retry</button>
       </div>
     );
   }

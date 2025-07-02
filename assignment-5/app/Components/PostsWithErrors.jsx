@@ -2,19 +2,23 @@
 
 import React, { useState, useEffect } from "react";
 
-export default function PostWithRetry() {
+const PostWithErrors = () => {
+  // UseStates for data fetched and errors
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
+    // Sets the loading true
     setLoading(true);
     setError(null);
     try {
       const res = await fetch("https://jsonplaceholder.typicode.com/users");
+      // If we don't get any responce
       if (!res.ok) {
         throw new Error(`Failed to fetch data ${res.status}`);
       }
+      // Awaits to convert data to json
       const data = await res.json();
       setPosts(data);
     } catch (err) {
@@ -29,10 +33,12 @@ export default function PostWithRetry() {
   }, []);
 
 
+  // If we receive an error
   if (error) {
     return (
       <div style={{ padding: 20, color: "red", textAlign: "center" }}>
         <p>Error loading data: {error}</p>
+        {/* Button to fetch data from server */}
         <button
           onClick={fetchData}
           style={{
@@ -51,7 +57,8 @@ export default function PostWithRetry() {
     );
   }
 
- 
+
+  //If loading is there
   if (loading) {
     return (
       <div style={{ padding: 20, textAlign: "center" }}>
@@ -79,6 +86,7 @@ export default function PostWithRetry() {
 
   return (
     <ul style={{ padding: 0, listStyleType: "none", maxWidth: 600, margin: "20px auto" }}>
+      {/* Displaying the data fetched */}
       {posts.map((post) => (
         <li
           key={post.id}
@@ -101,3 +109,5 @@ export default function PostWithRetry() {
     </ul>
   );
 }
+
+export default PostWithErrors;

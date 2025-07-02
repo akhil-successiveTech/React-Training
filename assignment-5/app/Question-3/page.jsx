@@ -1,8 +1,8 @@
-import PostWithRetry from "../Components/PostsWithErrors";
+import PostWithErrors from "../Components/PostsWithErrors";
 
 const Home = () => {
     return(
-        <PostWithRetry/>
+        <PostWithErrors/>
     )   
 }
 export default Home;

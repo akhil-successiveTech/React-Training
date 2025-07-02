@@ -1,8 +1,8 @@
-import PaginationCommunityNoSnap from "../Components/Pagination";
+import PostDataGrid from "../Components/Pagination";
 
 const Home = () => {
     return(
-        <PaginationCommunityNoSnap/>
+        <PostDataGrid/>
     )
 }
 export default Home;
