@@ -14,7 +14,7 @@ export default function PostForm() {
 //   Created for errors
   const [error, setError] = useState(null);
 
-//   
+  // Function to handle submit button
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -38,6 +38,7 @@ export default function PostForm() {
   return (
     <>
       <h1>Create Post</h1>
+      {/* Form to get the data from user */}
       <form onSubmit={handleSubmit}>
         <label>Title:</label>
         <input

@@ -8,7 +8,6 @@ export default async function PostsPage() {
 
     return(
       <>
-        
         <h1>Posts from JSON Placeholder</h1>
         {posts.map(post => (
           // Displaying data of posts

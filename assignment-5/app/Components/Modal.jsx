@@ -3,6 +3,7 @@ import React from 'react';
 export default function Modal({ isOpen, onClose, children }) {
   if (!isOpen) return null;
 
+  // If isOpen is true, it will render the button
   return (
     <div style={overlayStyle} onClick={onClose}>
       <div style={modalStyle} onClick={e => e.stopPropagation()}>
@@ -13,6 +14,7 @@ export default function Modal({ isOpen, onClose, children }) {
   );
 }
 
+// Defined the styles
 const overlayStyle = {
   position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
   background: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center',

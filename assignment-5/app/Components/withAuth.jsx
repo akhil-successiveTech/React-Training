@@ -1,8 +1,10 @@
+"use client"
+import { useAuth } from "../Context/AuthContext";
 const WithAuth = (WrappedComponent) =>{
 
   return function Authentication(props){
-      const {isLoggedIn} = props; 
-      if(isLoggedIn){
+      const {user} = useAuth(); 
+      if(user){
           return <WrappedComponent {...props}/>
       }
       return (
@@ -12,14 +14,15 @@ const WithAuth = (WrappedComponent) =>{
       );
   }
 }
+export default WithAuth;
 
-const Profile = () =>{
-  return (
-      <div>
-          <h2>Profile Page</h2>
-      </div>
-  );
-}
+// const Profile = () =>{
+//   return (
+//       <div>
+//           <h2>Profile Page</h2>
+//       </div>
+//   );
+// }
 
-const Result = WithAuth(Profile);
-export default Result;
+// const Result = WithAuth(Profile);
+// export default Result;

@@ -15,6 +15,7 @@ export default async function PostsPage() {
     error = err.message || "Failed to load posts";
   }
 
+  // If there is an error the display that
   if (error) {
     return (
       <div style={{ color: "red", textAlign: "center", marginTop: 50 }}>
@@ -27,6 +28,7 @@ export default async function PostsPage() {
     <main style={{ maxWidth: 700, margin: "30px auto", padding: "0 20px" }}>
       <h1 style={{ textAlign: "center", marginBottom: 30 }}>Posts</h1>
       <ul style={{ listStyle: "none", padding: 0 }}>
+        {/* Display the data fetched */}
         {posts.map((post) => (
           <li
             key={post.id}

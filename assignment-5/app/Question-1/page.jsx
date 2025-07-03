@@ -4,7 +4,5 @@ const Home = () => {
     return(
         <PostsPage/>
     )
-    
 }
-
 export default Home;

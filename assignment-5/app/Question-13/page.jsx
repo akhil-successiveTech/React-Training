@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Modal from '../Components/Modal';
 
 export default function HomePage() {
+  // Check the condition that is it open or not
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -16,6 +17,7 @@ export default function HomePage() {
         backgroundColor: '#f9fafb',
       }}
     >
+      {/* Button to open the modal */}
       <button
         onClick={() => setIsOpen(true)}
         style={{
@@ -31,6 +33,7 @@ export default function HomePage() {
         Open Modal
       </button>
 
+        {/* Sended the content to display to the modal */}
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <h2 style={{ marginTop: 0, marginBottom: '0.5rem', fontSize: '1.5rem' }}>
           Basic Modal 

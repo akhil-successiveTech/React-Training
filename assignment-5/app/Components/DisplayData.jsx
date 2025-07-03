@@ -2,6 +2,7 @@
 const DisplayData = ({data}) =>{
     return (
         <div>
+            {/* Function to display data */}
             {data.map((user) => {
                 return <p key={user.id}>{user.name}</p>
             })}

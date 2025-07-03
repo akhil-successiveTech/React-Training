@@ -1,5 +1,6 @@
 "use client";
 function SecretPage() {
+  // It is the secret page to display
   return (
     <div>
       <h2>Secret Page</h2>
