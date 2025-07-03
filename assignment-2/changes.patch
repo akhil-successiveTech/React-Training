@@ -1,0 +1,312 @@
+diff --git a/assignment-2/app/Question-18/page.jsx b/assignment-2/app/Question-18/page.jsx
+index cfd5aea..e9bc465 100644
+--- a/assignment-2/app/Question-18/page.jsx
++++ b/assignment-2/app/Question-18/page.jsx
+@@ -2,7 +2,7 @@
+ // hook that allows storing and retrieving data from local storage. Implement methods for setting, getting, and
+ // removing data using the hook.
+
+-import UserPreferences from "@/app/components/Cart";
++import UserPreferences from "@/app/components/UserPreferences";
+
+ export default function Home() {
+   return (
+diff --git a/assignment-2/app/components/Cart.jsx b/assignment-2/app/components/Cart.jsx
+index b3f3b76..33c99e1 100644
+--- a/assignment-2/app/components/Cart.jsx
++++ b/assignment-2/app/components/Cart.jsx
+@@ -6,6 +6,8 @@ import { CartContext } from "@/context";
+ import { useContext } from "react";
+
+ // Array of products
++
++//@redo
+ const products = [
+     {id: 1, name: "Shoes", price: 1000},
+     {id: 2, name: "Shirt", price: 500},
+diff --git a/assignment-2/app/components/Notification.jsx b/assignment-2/app/components/Notification.jsx
+index caf7821..652f356 100644
+--- a/assignment-2/app/components/Notification.jsx
++++ b/assignment-2/app/components/Notification.jsx
+@@ -2,13 +2,22 @@
+ import { useEffect, useState } from "react"
+
+ const Notification = () => {
+-    let[message, setMessage] = useState("Message Received!")
++    const [message, setMessage] = useState("");
++    const [clearMessage, setClearMessage] = useState(false);
++
++    useEffect(() => {
++        setMessage("New Message Received!");
++        setClearMessage(true);
++    }, [])
++
++    useEffect(() => {
++        setTimeout(() => {
++            setMessage("")
++        }, 5000)
++    }, [clearMessage])
++
+     return(
+-        useEffect(() => {
+-            setInterval(() => {
+-                alert(message)
+-            }, 5000)
+-        })
++        <div>{message}</div>
+     )
+ }
+
+diff --git a/assignment-2/app/components/Parent.jsx b/assignment-2/app/components/Parent.jsx
+index 7c5eb71..4c840e2 100644
+--- a/assignment-2/app/components/Parent.jsx
++++ b/assignment-2/app/components/Parent.jsx
+@@ -20,8 +20,8 @@ const Parent = () => {
+
+     return(
+         <>
+-            <p>Count is: {value}</p>
+-            <button onClick={buttonClicked}>Increment</button>
++            {/* <p>Count is: {value}</p> */}
++            {/* <button onClick={buttonClicked}>Increment</button> */}
+             <Child buttonClicked={buttonClicked} count={value} reset={reset}/>
+         </>
+     )
+diff --git a/assignment-2/app/components/Slideshow.jsx b/assignment-2/app/components/Slideshow.jsx
+index bf36a00..fb69ecc 100644
+--- a/assignment-2/app/components/Slideshow.jsx
++++ b/assignment-2/app/components/Slideshow.jsx
+@@ -1,10 +1,11 @@
+ "use client";
+
+ import { useState, useEffect } from "react";
+-
++//@add pause button logic
+ const Slideshow = () => {
+   const [count, setCount] = useState(0);
+   const [time, setTime] = useState(2);
++  const [pause, setPause] = useState(false);
+   const arr = [
+     "./images/1.jpg",
+     "./images/2.jpg",
+@@ -18,12 +19,22 @@ const Slideshow = () => {
+     "./images/10.jpg",
+   ];
+
++  console.log("pause", pause);
++
++
+   useEffect(() => { // Need to see
+-    const interval = setInterval(() => {
+-      setCount((prevCount) => (prevCount + 1) % arr.length);
+-    }, time * 1000);
++    let interval;
++    if (!pause) {
++      interval = setInterval(() => {
++        if (!pause) {
++          setCount((prevCount) => (prevCount + 1) % arr.length);
++        }
++      }, time * 1000);
++    }
+
+-    return () => clearInterval(interval);
++    return () => {
++      clearInterval(interval);
++    };
+   }, [time]);
+
+   return (
+@@ -43,7 +54,8 @@ const Slideshow = () => {
+           onChange={(e) => setTime(Number(e.target.value))}
+         />
+       </div>
+-      <button onClick={() => setCount((count + 1) % arr.length)}>
++      <button onClick={() => setPause(!pause)} style={{ border: "1px solid black", margin: 1 }} >{pause === true ? "Play" : "Pause"}</button>
++      <button style={{ border: "1px solid black", margin: 1 }} onClick={() => setCount((count + 1) % arr.length)}>
+         Next Image
+       </button>
+     </>
+diff --git a/assignment-2/app/components/StudentList.jsx b/assignment-2/app/components/StudentList.jsx
+index b3ca29f..1e79169 100644
+--- a/assignment-2/app/components/StudentList.jsx
++++ b/assignment-2/app/components/StudentList.jsx
+@@ -3,24 +3,20 @@
+ import React, { useState, useMemo } from "react";
+
+ const StudentList = () => {
+-  const [students, setStudents] = useState(["Alice", "Bob", "Charlie"]);
++  const SAMPLE_LIST = useMemo(() => ["Alice", "Bob", "Charlie"]);
++  const [students, setStudents] = useState(SAMPLE_LIST);
+
+   const addStudent = () => {
+     const newName = `Student ${students.length + 1}`;
+     setStudents((prev) => [...prev, newName]);
+   };
+
+-  const memoizedStudentList = useMemo(() => {
+-    console.log("Generating student list...");
+-    return students.map((name, index) => (
+-      <li key={index}>{name}</li>
+-    ));
+-  }, [students]);
+-
+   return (
+     <div style={{ padding: 20 }}>
+       <h2>Student List</h2>
+-      <ul>{memoizedStudentList}</ul>
++      <ul>{students.map((name, index) => (
++        <li key={index}>{name}</li>
++      ))}</ul>
+       <button onClick={addStudent}>Add Student</button>
+     </div>
+   );
+diff --git a/assignment-2/app/components/Task.jsx b/assignment-2/app/components/Task.jsx
+index 43dc749..336fca1 100644
+--- a/assignment-2/app/components/Task.jsx
++++ b/assignment-2/app/components/Task.jsx
+@@ -4,6 +4,8 @@
+ "use client";
+ import { useCallback, useState } from "react";
+
++
++// @Redo
+ const Home = () => {
+   // Array of tasks
+   const [Tasks, setTasks] = useState([
+diff --git a/assignment-2/app/components/ToDoList.jsx b/assignment-2/app/components/ToDoList.jsx
+index ba0e997..0873347 100644
+--- a/assignment-2/app/components/ToDoList.jsx
++++ b/assignment-2/app/components/ToDoList.jsx
+@@ -2,20 +2,29 @@
+ import { use, useState } from "react"
+
+ const ToDoList = () => {
+-    let [string, setString] = useState("")
+-    let [ToDos, setToDos] = useState([])
++    let [task, setTask] = useState("")
++    // use camelCase
+
+-    function add () {
+-        if (string.trim() === "") return;
+-        setToDos([...ToDos, string]);
+-        setString("");
++    let [todoList, setTodoList] = useState([])
++
++    function add() {
++        if (task.trim() === "") return;
++        setTodoList([...todoList, { task, isCompleted: false }]);
++        setTask("");
++    }
++
++    const toggleStatus = (index) => {
++        todoList[index] = { ...todoList[index], isCompleted: !todoList[index].isCompleted }
++        setTodoList(JSON.parse(JSON.stringify(todoList)));
+     }
+
+-    function deleteArr (index) {
+-        setToDos(ToDos.filter((_, i) => i !== index));
++    function deleteArr(index) {
++        setTodoList(todoList.filter((_, i) => i !== index));
+     }
+-
+-    return(
++
++    console.log("todoList", todoList);
++
++    return (
+         <>
+             <form onSubmit={(e) => {
+                 e.preventDefault();
+@@ -24,24 +33,34 @@ const ToDoList = () => {
+                     Enter the task:
+                 </label>
+                 <input
+-                style={{border: "2px solid black", padding: "5px 5px"}}
+-                type="text"
+-                value={string}
+-                onChange={(e) => setString(e.target.value)}
++                    style={{ border: "2px solid black", padding: "5px 5px" }}
++                    type="text"
++                    value={task}
++                    onChange={(e) => setTask(e.target.value)}
+                 >
+                 </input>
+-                <button style={{border: "2px solid black", padding: "5px 5px"}} onClick={add}>Add</button>
++                <button style={{ border: "2px solid black", padding: "5px 5px" }} onClick={add}>Add</button>
+             </form>
+-            <br/>
+-            <p>To Do List: {ToDos}</p>
+-            <br/>
++            <br />
++            {/* <p>To Do List: {toDos}</p> */}
++            <br />
+             <ul>
+-                Value is:
+-                {ToDos.map((value, index) => (
++                Value is:
++                {todoList.map(({ task, isCompleted }, index) => (
+                     <li key={index}>
+                         {/* {value} */}
+-                        <span>{value}</span>
+-                        <button style={{border: "5px 5px"}} onClick={() => deleteArr(index)}>Delete</button>
++                        <div style={{
++                            display: "flex",
++                            border: "1px solid black",
++                            width: "400px",
++                            justifyContent: "space-between"
++                        }}>
++                            <span style={{ textDecorationLine: isCompleted === true ? "line-through" : "none"}}>{task}</span>
++                            <div>
++                                <input onChange={() => toggleStatus(index)} type="checkbox" name="" id="" />
++                                <button style={{ border: "1px solid black", marginLeft: "10px" }} onClick={() => deleteArr(index)}>Delete</button>
++                            </div>
++                        </div>
+                     </li>
+                 ))}
+             </ul>
+diff --git a/assignment-2/app/components/Vote.jsx b/assignment-2/app/components/Vote.jsx
+index 4402fa7..81a547f 100644
+--- a/assignment-2/app/components/Vote.jsx
++++ b/assignment-2/app/components/Vote.jsx
+@@ -6,24 +6,28 @@ import { useReducer } from "react";
+
+ const Home = () => {
+
+-    //Reducer functions
+-    const reducer1 = (state, action) => {
+-        return state+1;
+-    };
+-    const reducer2 = (state, action) => {
+-        return state+1;
++    const reducer = (state, action) => {
++        switch (action.type) {
++            case "INC":
++                return ({ ...state, congress: state.congress + 1 })
++                break;
++            case "BJP":
++                return ({ ...state, bjp: state.bjp + 1 })
++                break;
++            default:
++                break;
++        }
+     };
+
+-    // Used useReducer hook
+-    const[BJP, dispatchBJP] = useReducer(reducer1, 0);
+-    const[congress, dispatchCon] = useReducer(reducer2, 0);
++    const counting = { bjp : 0, congress: 0 };
++    const[state, dispatch] = useReducer(reducer, counting);
+
+     return(
+         <>
+-            <p>BJP: {BJP}</p>
+-            <button onClick={() => {dispatchBJP({name: "BJP"})}}>Vote for BJP</button>
+-            <p>Congress: {congress}</p>
+-            <button onClick={() => {dispatchCon({type: "Increment"})}}>Vote for Congress</button>
++            <p>BJP: {state.bjp}</p>
++            <button onClick={() => dispatch({type: "BJP"})}>Vote for BJP</button>
++            <p>Congress: {state.congress}</p>
++            <button onClick={() => dispatch({type: "INC"})}>Vote for Congress</button>
+         </>
+     )
+ }
