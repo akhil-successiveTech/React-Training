@@ -16,6 +16,17 @@ export default function Home() {
       <br />
       <Link href={"./Question-6"}>Question-6</Link>
       <br />
+      <Link href={"./Question-7"}>Question-7</Link>
+      <br />
+      <Link href={"./Question-8"}>Question-8</Link>
+      <br />
+      <Link href={"./Question-9"}>Question-9</Link>
+      <br />
+      <Link href={"./Question-10"}>Question-10</Link>
+      <br />
+      <Link href={"./Question-11"}>Question-11</Link>
+      <br />
+      <Link href={"./Question-12"}>Question-12</Link>
     </>
   );
 }
