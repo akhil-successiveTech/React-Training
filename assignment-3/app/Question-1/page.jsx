@@ -1,12 +1,24 @@
-import {AuthProvider} from "./AuthContext";
-import Authentication from "./AuthComponent";
-import { ThemeProvider } from "./ThemeContext";
-import { Children } from "react";
+import AuthComponent from "@/components/assignment-3/AuthComponent";
+import { AuthProvider } from "../context/AuthContext";
+import Login from "../Component/Login";
 
-const Page = () => {
+const Auth = () => {
   return (
-    <Authentication />
+    <>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "0.5rem",
+          justifyContent: "center",
+        }}
+      >
+        <AuthProvider>
+          <AuthComponent />
+        </AuthProvider>
+      </div>
+    </>
   );
 };
 
-export default Page;
+export default Auth;
