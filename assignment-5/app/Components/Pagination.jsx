@@ -9,6 +9,7 @@ export default function PostDataGrid() {
   const [rows, setRows] = useState([]);
   // To manage the loading spinner
   const [loading, setLoading] = useState(true);
+  const pageSize = 10;
 
   // Tells the DataGrid how to render the columns
   const columns = [
@@ -21,7 +22,7 @@ export default function PostDataGrid() {
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+        const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_start=${start}&_limit=${pageSize}`);
         const data = await res.json();
         setRows(data);
       } catch (error) {
