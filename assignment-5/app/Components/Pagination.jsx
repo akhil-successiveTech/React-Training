@@ -1,57 +1,68 @@
 "use client";
-import * as React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 
 export default function PostDataGrid() {
-  // State to hold the table data (posts)
   const [rows, setRows] = useState([]);
-  // State to manage loading state while fetching data
   const [loading, setLoading] = useState(true);
-  // Current page index (starts from 0)
   const [page, setPage] = useState(0);
-  // Total number of rows in the dataset (can be dynamic if your API supports it)
-  const [rowCount, setRowCount] = useState(100);
-  // Number of rows to display per page
-  const pageSize = 10;
 
+  // Sets the page size and maximum number of rows to be fetched
+  const pageSize = 10;
+  const rowCount = 100;
+
+  // Defines the column of data grid
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
     { field: "title", headerName: "Title", flex: 1 },
     { field: "body", headerName: "Body", flex: 2 },
   ];
 
-  useEffect(() => {
-    async function fetchPosts() {
-      setLoading(true); // Show loading spinner
-      try {
-        const start = page * pageSize;
-        const res = await fetch(
-          `https://jsonplaceholder.typicode.com/posts?_start=${start}&_limit=${pageSize}`
-        );
-        const data = await res.json();
-        setRows(data); // Set fetched posts as rows
-      } catch (error) {
-        console.error("Failed to fetch posts:", error);
-      } finally {
-        setLoading(false);
-      }
+  // Function to fetch data
+  const fetchData = async (pageIndex) => {
+    setLoading(true);
+    try {
+      const start = pageIndex * pageSize;
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/posts?_start=${start}&_limit=${pageSize}`
+      );
+      const data = await response.json();
+      setRows(data);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    } finally {
+      setLoading(false);
     }
-    fetchPosts();
+  };
+
+  // Helps in re-render
+  useEffect(() => {
+    fetchData(page);
   }, [page]);
 
+  // This function will change the page after every time next button clicks
+  const handleNext = () => {
+    if ((page + 1) * pageSize >= rowCount) {
+      setPage(0); 
+    } else {
+      setPage((prev) => prev + 1);
+    }
+  };
+
   return (
-    <div style={{ height: 500, width: "100%" }}>
+    <div style={{ height: 500, width: "100%", padding: 20 }}>
       <DataGrid
-        rows={rows}                   
-        columns={columns}               
-        pageSize={pageSize}            
-        paginationMode="server"        
-        rowCount={rowCount}            
-        onPageChange={(newPage) => setPage(newPage)} 
-        page={page}                   
-        loading={loading}             
+        rows={rows}
+        columns={columns}
+        pageSize={pageSize}
+        rowCount={rowCount}
+        pagination={false} // To handle the pagination manually using the next button
+        loading={loading}
+        hideFooterPagination
       />
+      <button onClick={handleNext} style={{ marginTop: 10, border: "2px solid black", padding: "5px 5px"}}>
+        Show Next 10
+      </button>
     </div>
   );
 }

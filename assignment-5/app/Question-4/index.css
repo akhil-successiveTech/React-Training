@@ -1,0 +1,5 @@
+.MuiTablePagination-selectLabel,
+.MuiTablePagination-select,
+.MuiTablePagination-selectIcon {
+  display: none !important;
+}
