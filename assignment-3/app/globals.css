@@ -24,3 +24,12 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.parent{
+  height: 100vh;
+}
+
+body.dark {
+  --bg: #121212;
+  --text: #ffffff;
+}

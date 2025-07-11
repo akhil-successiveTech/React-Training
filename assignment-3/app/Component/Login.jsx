@@ -2,6 +2,7 @@
 
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { redirect } from "next/navigation";
 
 const Login = () => {
   const { setLoggedIn, handleAuth } = useContext(AuthContext);
@@ -12,11 +13,11 @@ const Login = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
     if (userName == myUserName && password == myPassword) {
       setLoggedIn(true);
       handleAuth();
-      alert("User Logged in");
+      // alert("User Logged in");
+      redirect("/Question-5/Profile")
     }
   };
 
@@ -32,7 +33,6 @@ const Login = () => {
             onChange={(e) => setUserName(e.target.value)}
           />
         </label>
-
         <label>
           {" "}
           Password

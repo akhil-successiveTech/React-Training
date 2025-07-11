@@ -1,5 +1,5 @@
 "use client";
-import { AuthContext } from "@/context/AuthContext";
+import { AuthContext } from "@/app/context/AuthContext";
 import { redirect } from "next/navigation";
 import { useContext } from "react";
 
@@ -10,7 +10,7 @@ const Profile = () => {
       <h1>This is Profile page</h1>
     </>
   ) : (
-    redirect("/assignment-3/question-4/Login")
+    redirect("/Question-4/Login")
   );
 };
 

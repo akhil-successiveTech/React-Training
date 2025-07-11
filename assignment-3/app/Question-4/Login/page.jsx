@@ -1,5 +1,5 @@
-import { AuthProvider } from "@/context/AuthContext";
-import Login from "@/components/assignment-3/Login";
+import { AuthProvider } from "@/app/context/AuthContext";
+import Login from "@/app/Component/Login";
 
 
 const LoginPage = () => {

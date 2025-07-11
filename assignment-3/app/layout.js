@@ -2,6 +2,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "./context/AuthContext";
 import Link from "next/link";
+import { ThemeContext } from "./context/ThemeContext";
+import { useContext } from "react";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,7 +29,22 @@ export default function RootLayout({ children }) {
       >
         <nav style={{ marginBottom: "20px" }}>
           <Link href="/" style={{ marginRight: "10px" }}>Home</Link>
-          <Link href="./About/about">About</Link>
+          <Link href="../Question-3/About">About</Link>
+
+          <button
+        onClick={toggleTheme}
+        style={{
+          marginLeft: "auto",
+          padding: "6px 12px",
+          backgroundColor: dark ? "#444" : "#ddd",
+          color: dark ? "#fff" : "#000",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer",
+        }}
+      >
+        {dark ? "Light Mode" : "Dark Mode"}
+      </button>
         </nav>
         <hr />
         <AuthProvider>

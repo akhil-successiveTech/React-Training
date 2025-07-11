@@ -1,13 +1,9 @@
-"use client";
-import { AuthContext } from "@/context/AuthContext";
-import { redirect } from "next/navigation";
-import React, { useContext } from "react";
+import React from 'react'
 
-const About = () => {
-  const { loggedIn } = useContext(AuthContext);
+const about = () => {
   return (
-    <>{loggedIn ? <h1>This is a login page</h1> : redirect("/assignment-3/question-4/Login")}</>
-  );
-};
+    <div>This is about page</div>
+  )
+}
 
-export default About;
+export default about

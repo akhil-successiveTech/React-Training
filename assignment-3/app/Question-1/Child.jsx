@@ -1,10 +1,9 @@
 "use client";
 import React, { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
-const AuthComponent = () => {
-  const { loggedIn, userName, handleAuth, handleLogout } =
-    useContext(AuthContext);
+const Child = () => {
+  const { loggedIn, userName, handleAuth, handleLogout } = useContext(AuthContext);
 
   return (
     <div
@@ -35,4 +34,4 @@ const AuthComponent = () => {
   );
 };
 
-export default AuthComponent;
+export default Child;

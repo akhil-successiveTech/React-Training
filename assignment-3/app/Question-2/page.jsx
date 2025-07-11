@@ -1,5 +1,5 @@
-import { AuthProvider } from "@/context/AuthContext";
-import ThemeProvider from "@/context/ThemeContext";
+import { AuthProvider } from "../context/AuthContext";
+import { ThemeProvider } from "../context/ThemeContext";
 import Child from "./Child";
 
 const Auth = () => {
