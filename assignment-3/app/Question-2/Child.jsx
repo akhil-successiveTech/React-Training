@@ -1,11 +1,11 @@
 "use client";
 import React, { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 
 const Child = () => {
-  const { loggedIn, userName, handleAuth, handleLogout } = useContext(AuthContext);
+  const { loggedIn, userName, login, logout } = useAuth();
   const { dark, toggleTheme } = useContext(ThemeContext);
 
   return (
@@ -17,14 +17,14 @@ const Child = () => {
       {loggedIn ? (
         <button
           style={{backgroundColor:dark? "black" : "white", color: dark? "white" : "black"}}
-          onClick={handleLogout}
+          onClick={logout}
         >
           Logout
         </button>
       ) : (
         <button
           style={{backgroundColor:dark? "black" : "white", color: dark? "white" : "black"}}
-          onClick={handleAuth}
+          onClick={login}
         >
           Login
         </button>

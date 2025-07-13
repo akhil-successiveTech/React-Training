@@ -1,9 +1,9 @@
 "use client";
 import React, { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 const Child = () => {
-  const { loggedIn, userName, handleAuth, handleLogout } = useContext(AuthContext);
+  const { loggedIn, userName, login, logout } = useAuth();
 
   return (
     <div
@@ -17,14 +17,14 @@ const Child = () => {
       {loggedIn ? (
         <button
           style={{ padding: "10px", fontSize: "1rem" }}
-          onClick={handleLogout}
+          onClick={logout}
         >
           Logout
         </button>
       ) : (
         <button
           style={{ padding: "10px", fontSize: "1rem" }}
-          onClick={handleAuth}
+          onClick={login}
         >
           Login
         </button>

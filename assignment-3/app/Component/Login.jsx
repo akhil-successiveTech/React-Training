@@ -1,51 +1,48 @@
+// app/login/page.tsx
 "use client";
 
-import { useContext, useState } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { redirect } from "next/navigation";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
 
-const Login = () => {
-  const { setLoggedIn, handleAuth } = useContext(AuthContext);
-  const myUserName = "Akhil";
-  const myPassword = "123456";
+export default function Login() {
+  const { login } = useAuth();
+  const router = useRouter();
+
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const submitHandler = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (userName == myUserName && password == myPassword) {
-      setLoggedIn(true);
-      handleAuth();
-      // alert("User Logged in");
-      redirect("/Question-5/Profile")
+
+    if (userName === "akhil" && password === "123456") {
+      login();
+      router.push("/Question-3/About");
+    } else {
+      setError("Invalid credentials");
     }
   };
 
   return (
-    <>
-      <form action="">
-        <label htmlFor="">
-          {" "}
-          UserName
-          <input
-            type="text"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-          />
-        </label>
-        <label>
-          {" "}
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></input>
-        </label>
-        <button onClick={submitHandler}>Submit</button>
-      </form>
-    </>
+    <form onSubmit={handleSubmit}>
+      <h2>Login</h2>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <label>
+        Username:
+        <input value={userName} onChange={(e) => setUserName(e.target.value)} />
+      </label>
+      <br />
+      <label>
+        Password:
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </label>
+      <br />
+      <button type="submit">Login</button>
+    </form>
   );
-};
-
-export default Login;
+}

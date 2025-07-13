@@ -1,34 +1,42 @@
+// app/context/AuthContext.tsx
 "use client";
-import { createContext, useEffect, useState } from "react";
 
-export const AuthContext = createContext();
+import React, { createContext, useState, useEffect, useContext } from "react";
+
+const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [userName, setUserName] = useState("User");
+  const [userName, setUserName] = useState("Akhil");
+  const [loading, setLoading] = useState(true);
 
-  const handleAuth = () => {
-    const user = "Akhil"
+  const login = () => {
+    const user = "akhil"
     setUserName(user);
     setLoggedIn(true);
+    localStorage.setItem("authUser", JSON.stringify({ userName: user }));
   };
 
-  const handleLogout = () => {
+  const logout = () => {
     setUserName("");
     setLoggedIn(false);
+    localStorage.removeItem("authUser");
   };
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("authUser"));
-    if (storedUser?.type==='Admin') {
+    if (storedUser?.userName) {
       setUserName(storedUser.userName);
       setLoggedIn(true);
     }
+    setLoading(false);
   }, []);
 
   return (
-    <AuthContext.Provider value={{ loggedIn, userName, setLoggedIn, handleAuth, handleLogout }}>
+    <AuthContext.Provider value={{ loggedIn, userName, login, logout, loading}}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+export const useAuth = () => useContext(AuthContext);

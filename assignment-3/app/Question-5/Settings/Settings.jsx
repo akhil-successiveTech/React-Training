@@ -1,10 +1,9 @@
 "use client";
-import { AuthContext } from "@/context/AuthContext";
+import { useAuth } from "@/app/context/AuthContext";
 import { redirect } from "next/navigation";
-import { useContext } from "react";
 
 const Settings = () => {
-  const { loggedIn } = useContext(AuthContext);
+  const { loggedIn } = useAuth();
   return loggedIn ? (
     <>
       <h1>This is Profile page</h1>

@@ -1,9 +1,19 @@
-import React from 'react'
+// app/page.tsx
+"use client";
 
-const home = () => {
+import { useAuth } from "@/app/context/AuthContext";
+
+export default function Home() {
+  const { userName, loggedIn } = useAuth();
+
   return (
-    <div>This is home page</div>
-  )
+    <div>
+      {loggedIn ? (
+        <h2>Welcome, {userName}!</h2>
+      ) : (
+        <h2>Please login to access protected pages</h2>
+      )}
+      <p>This is the home page.</p>
+    </div>
+  );
 }
-
-export default home

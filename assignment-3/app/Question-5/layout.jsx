@@ -13,13 +13,13 @@ export default function DashboardLayout({ children }) {
       >
         <ul style={{ listStyle: "none", padding: 0 }}>
           <li>
-            <Link href="/question-5">Dashboard</Link>
+            <Link href="/Question-5">Dashboard</Link>
           </li>
           <li>
             <Link href="/Question-5/Profile">Profile</Link>
           </li>
           <li>
-            <Link href="/Settings">Settings</Link>
+            <Link href="/Question-5/Settings">Settings</Link>
           </li>
         </ul>
       </nav>

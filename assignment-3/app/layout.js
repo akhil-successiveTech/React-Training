@@ -2,9 +2,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "./context/AuthContext";
 import Link from "next/link";
-import { ThemeContext } from "./context/ThemeContext";
+import { ThemeContext , ThemeProvider} from "./context/ThemeContext";
 import { useContext } from "react";
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,10 +27,13 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <nav style={{ marginBottom: "20px" }}>
+          <Link href="../../dashboard" style={{ marginRight: "10px" }}>Dashboard</Link>
+          <Link href="../../dashboard/profile" style={{ marginRight: "10px" }}>Profile</Link>  
+          <Link href="../../dashboard/setting" style={{ marginRight: "10px" }}>Settings</Link>
           <Link href="/" style={{ marginRight: "10px" }}>Home</Link>
-          <Link href="../Question-3/About">About</Link>
+          <Link href="../Question-3/About" style={{ marginRight: "10px" }}>About</Link>
 
-          <button
+          {/* <button
         onClick={toggleTheme}
         style={{
           marginLeft: "auto",
@@ -44,11 +46,13 @@ export default function RootLayout({ children }) {
         }}
       >
         {dark ? "Light Mode" : "Dark Mode"}
-      </button>
+      </button> */}
         </nav>
         <hr />
         <AuthProvider>
+          <ThemeProvider>
             {children}
+          </ThemeProvider>
         </AuthProvider>
       </body>
     </html>
