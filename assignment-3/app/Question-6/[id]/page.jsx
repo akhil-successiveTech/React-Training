@@ -40,8 +40,10 @@ export default function ProductDetailPage() {
   if (!params) return <p>Params not found — check your folder structure.</p>;
 
   const { id } = params;
+  console.log(id)
 
   const product = products.find((p) => p.id.toString() === id);
+  
 
   if (!product) return <p>Product not found.</p>;
 
